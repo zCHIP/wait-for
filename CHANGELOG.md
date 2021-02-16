@@ -1,3 +1,10 @@
+# [2.1.0-beta.1](https://github.com/eficode/wait-for/compare/v2.0.0...v2.1.0-beta.1) (2021-02-16)
+
+
+### Features
+
+* adds support for http using wget ([3758bab](https://github.com/eficode/wait-for/commit/3758babd60b300068aee7bf80691e5085c3949b8)), closes [#14](https://github.com/eficode/wait-for/issues/14)
+
 # [2.0.0](https://github.com/eficode/wait-for/compare/v1.2.0...v2.0.0) (2021-02-04)
 
 
