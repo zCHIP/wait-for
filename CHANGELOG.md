@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/eficode/wait-for/compare/v2.1.1...v2.1.2) (2021-04-27)
+
+
+### Bug Fixes
+
+* uses timeout in nc as it is used with wget ([#42](https://github.com/eficode/wait-for/issues/42)) ([0195167](https://github.com/eficode/wait-for/commit/019516781dcca428cb0ee372e008e251e333f1ac))
+
 ## [2.1.1](https://github.com/eficode/wait-for/compare/v2.1.0...v2.1.1) (2021-03-12)
 
 
