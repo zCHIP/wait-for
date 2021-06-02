@@ -25,6 +25,9 @@
   <a href="https://github.com/Eficode/wait-for/releases">
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/Eficode/wait-for?style=flat-square">
   </a>
+  <a href="https://github.com/Eficode/wait-for/releases">
+  <img alt="Script file size" src="https://img.shields.io/github/size/eficode/wait-for/wait-for?style=flat-square&color=green">
+  </a>
   <br/>
   <a href="https://github.com/eficode/wait-for#examples"><strong>Example usage</strong></a>
   ·
