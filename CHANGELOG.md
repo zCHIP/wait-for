@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/eficode/wait-for/compare/v2.1.2...v2.1.3) (2021-07-12)
+
+
+### Bug Fixes
+
+* typo in error message for missing wget command ([db2479e](https://github.com/eficode/wait-for/commit/db2479e4411441e8edc9188d002ee73b3d3e8e4e))
+
 ## [2.1.2](https://github.com/eficode/wait-for/compare/v2.1.1...v2.1.2) (2021-04-27)
 
 
