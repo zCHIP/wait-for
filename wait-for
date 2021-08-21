@@ -25,7 +25,7 @@
 set -- "$@" -- "$TIMEOUT" "$QUIET" "$PROTOCOL" "$HOST" "$PORT" "$result"
 TIMEOUT=15
 QUIET=0
-# The protocol to make the request with, either "tcp" or "http"
+# The protocol to make the request with, either "tcp", "http", or "file"
 PROTOCOL="tcp"
 
 echoerr() {
@@ -36,7 +36,7 @@ usage() {
   exitcode="$1"
   cat << USAGE >&2
 Usage:
-  $0 host:port|url [-t timeout] [-- command args]
+  $0 host:port|url|file [-t timeout] [-- command args]
   -q | --quiet                        Do not output any status messages
   -t TIMEOUT | --timeout=timeout      Timeout in seconds, zero for no timeout
   -- COMMAND ARGS                     Execute command with args after the test finishes
@@ -52,6 +52,12 @@ wait_for() {
         exit 1
       fi
       ;;
+    file)
+      if ! command -v test >/dev/null; then
+        echoerr 'test command is missing!'
+        exit 1
+      fi
+      ;;
     wget)
       if ! command -v wget >/dev/null; then
         echoerr 'wget command is missing!'
@@ -62,11 +68,15 @@ wait_for() {
 
   while :; do
     case "$PROTOCOL" in
-      tcp) 
+      tcp)
         nc -w 1 -z "$HOST" "$PORT" > /dev/null 2>&1
         ;;
       http)
-        wget --timeout=1 -q "$HOST" -O /dev/null > /dev/null 2>&1 
+        wget --timeout=1 -q "$HOST" -O /dev/null > /dev/null 2>&1
+        ;;
+      file)
+        echo "${FILE_PATH#"file://"}"
+        test -f "${FILE_PATH#"file://"}"
         ;;
       *)
         echoerr "Unknown protocol '$PROTOCOL'"
@@ -75,7 +85,7 @@ wait_for() {
     esac
 
     result=$?
-        
+
     if [ $result -eq 0 ] ; then
       if [ $# -gt 7 ] ; then
         for result in $(seq $(($# - 7))); do
@@ -107,6 +117,11 @@ while :; do
     http://*|https://*)
     HOST="$1"
     PROTOCOL="http"
+    shift 1
+    ;;
+    file://*)
+    FILE_PATH="$1"
+    PROTOCOL="file"
     shift 1
     ;;
     *:* )
@@ -179,6 +194,12 @@ case "$PROTOCOL" in
       usage 2
     fi
   ;;
+  file)
+    if [ "$FILE_PATH" = "" ]; then
+      echoerr "Error: you need to provide a path to file to test."
+      usage 2
+    fi
+    ;;
 esac
 
 wait_for "$@"
