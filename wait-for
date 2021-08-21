@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -- "$@" -- "$TIMEOUT" "$QUIET" "$PROTOCOL" "$HOST" "$PORT" "$result"
+set -- "$@" -- "$TIMEOUT" "$QUIET" "$PROTOCOL" "$HOST" "$PORT" "$FILE_PATH" "$result"
 TIMEOUT=15
 QUIET=0
 # The protocol to make the request with, either "tcp", "http", or "file"
@@ -75,7 +75,6 @@ wait_for() {
         wget --timeout=1 -q "$HOST" -O /dev/null > /dev/null 2>&1
         ;;
       file)
-        echo "${FILE_PATH#"file://"}"
         test -f "${FILE_PATH#"file://"}"
         ;;
       *)
